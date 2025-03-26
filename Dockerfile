@@ -10,8 +10,8 @@ COPY . .
 # Construire l'application avec Gradle
 RUN gradle bootWar
 
-# Étape d'exécution avec Tomcat et JRE uniquement (plus léger que JDK)
-FROM tomcat:10.1.24-jre21-temurin-jammy
+# Étape d'exécution avec eclipse-temurin et JRE uniquement (plus léger que JDK)
+FROM eclipse-temurin:17-jre-alpine
 
 # Supprimer les applications par défaut de Tomcat pour réduire la taille
 RUN rm -rf $CATALINA_HOME/webapps/*
