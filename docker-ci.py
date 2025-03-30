@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-from typer import Typer,echo
+from typer import Typer
 from os import getcwd
 from docker import from_env
 
