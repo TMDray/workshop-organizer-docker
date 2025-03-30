@@ -9,8 +9,9 @@ default:
   services:
     - docker:26.1.4-dind
   before_script:
+    - cat requirements.txt
     - pip install --no-cache-dir -r requirements.txt
-
+    - pip list
 
 build_application:
   stage: build
