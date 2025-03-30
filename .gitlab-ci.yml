@@ -1,0 +1,20 @@
+include:
+  - template: "Workflows/Branch-Pipelines.gitlab-ci.yml"
+
+stages:
+  - build
+
+default:
+  image: hectorlachambre/oc-expert-devops-docker-python
+  services:
+    - docker:26.1.4-dind
+  before_script:
+    - pip install --no-cache-dir -r requirements.txt
+
+build_application:
+  stage: build
+  script:
+    - python3 docker-ci.py build --tag $CI_REGISTRY_IMAGE/$CI_COMMIT_REF_SLUG
+    - python3 docker-ci.py publish $CI_REGISTRY_IMAGE/$CI_COMMIT_REF_SLUG
+      --username $CI_REGISTRY_USER
+      --password $CI_REGISTRY_PASSWORD
