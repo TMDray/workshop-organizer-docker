@@ -6,7 +6,7 @@ from docker import from_env
 app = Typer()
 
 @app.command()
-def build():
+def build(tag: str = None):
     """
     Construit l'image Docker de l'application
     """
