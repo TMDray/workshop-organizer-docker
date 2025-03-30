@@ -11,6 +11,7 @@ default:
   before_script:
     - pip install --no-cache-dir -r requirements.txt
 
+
 build_application:
   stage: build
   script:
