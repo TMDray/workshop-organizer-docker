@@ -28,7 +28,7 @@ spec:
               key: username
         # TODO: add the spring database password environment variable 
         - name: SPRING_DATASOURCE_PASSWORD
-        valueFrom:
+          valueFrom:
           secretKeyRef:
             name: workshop-organizer-db-secret
             key: password
