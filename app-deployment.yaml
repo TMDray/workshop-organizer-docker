@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f docker-compose.yml
+    kompose.version: 1.35.0 (HEAD)
+  labels:
+    io.kompose.service: app
+  name: app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: app
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert -f docker-compose.yml
+        kompose.version: 1.35.0 (HEAD)
+      labels:
+        io.kompose.service: app
+    spec:
+      containers:
+        - env:
+            - name: SPRING_DATASOURCE_PASSWORD
+              value: oc2024
+            - name: SPRING_DATASOURCE_URL
+              value: jdbc:postgresql://db:5432/workshopsdb
+            - name: SPRING_DATASOURCE_USERNAME
+              value: workshops_user
+          image: workshop-organizer
+          name: app
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+      restartPolicy: Always

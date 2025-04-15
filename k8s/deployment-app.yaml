@@ -29,11 +29,11 @@ spec:
         # TODO: add the spring database password environment variable 
         - name: SPRING_DATASOURCE_PASSWORD
           valueFrom:
-          secretKeyRef:
-            name: workshop-organizer-db-secret
-            key: password
+            secretKeyRef:
+              name: workshop-organizer-db-secret
+              key: password
       # TODO: define imagePullSecrets to use a docker-registry secret and authorize Kubenetes 
       # to pull images from private gitlab registry.
       # I found this article to help you : https://medium.com/@stasko.lukasz/how-to-pull-docker-images-from-gitlab-container-registry-in-kubernetes-cluster-aae52787074a
       imagePullSecrets:
-        - name: workshop-organizer-db-secret
+        - name: gitlab-registry-secret
