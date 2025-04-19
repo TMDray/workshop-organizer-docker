@@ -16,6 +16,9 @@ FROM tomcat:10
 # Supprimer les applications par défaut de Tomcat
 RUN rm -rf $CATALINA_HOME/webapps/*
 
+# Créer l'utilisateur tomcat
+RUN useradd -m tomcat
+
 # Copier uniquement le fichier WAR de l'étape de build
 COPY --from=builder "/app/build/libs/*.war" "$CATALINA_HOME/webapps/ROOT.war"
 
