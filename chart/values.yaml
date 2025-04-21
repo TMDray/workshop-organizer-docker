@@ -1,0 +1,16 @@
+app:
+  image:
+    repository: registry.gitlab.com/formations7661213/workshop-organizer-docker/workshop-organizer-app
+    tag: latest
+  port: 8080
+  imagePullSecret: gitlab-registry-secret
+  replicaCount: 1
+
+# Configuration de la base de données
+db:
+  image:
+    repository: postgres
+    tag: latest
+  port: 5432
+  database: workshop-organizer-database
+  secretName: workshop-organizer-db-secret

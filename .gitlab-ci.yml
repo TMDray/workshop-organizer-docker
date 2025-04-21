@@ -1,6 +1,3 @@
-include:
-  - template: "Workflows/Branch-Pipelines.gitlab-ci.yml"
-
 stages:
   - build
 
@@ -16,7 +13,12 @@ default:
 build_application:
   stage: build
   script:
-    - python3 docker-ci.py build --tag $CI_REGISTRY_IMAGE/$CI_COMMIT_REF_SLUG
-    - python3 docker-ci.py publish $CI_REGISTRY_IMAGE/$CI_COMMIT_REF_SLUG
-      --username $CI_REGISTRY_USER
-      --password $CI_REGISTRY_PASSWORD
+    - python3 docker-ci.py build
+    - python3 docker-ci.py publish
+  variables:
+    DOCKER_HOST: tcp://docker:2375/
+    DOCKER_TLS_CERTDIR: ""
+    CI_REGISTRY_IMAGE: $CI_REGISTRY_IMAGE
+    CI_COMMIT_REF_SLUG: $CI_COMMIT_REF_SLUG
+    CI_REGISTRY_USER: $CI_REGISTRY_USER
+    CI_REGISTRY_PASSWORD: $CI_REGISTRY_PASSWORD
